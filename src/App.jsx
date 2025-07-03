@@ -348,19 +348,19 @@ export default function App() {
           </AnimatedText>
           <ul className="slide-list" style={{ fontSize: '1.8rem' }}>
             <AnimatedText delay={0.2} as="li">
-              <strong>🚫 Prohibited Keywords</strong> — Vape, kratom, CBD, and restricted substance detection
+              <strong>Prohibited Keywords</strong> — Vape, kratom, CBD, and restricted substance detection
             </AnimatedText>
             <AnimatedText delay={0.3} as="li">
-              <strong>📈 Price Volatility</strong> — Swings greater than 40% trigger fraud investigation
+              <strong>Price Volatility</strong> — Swings greater than 40% trigger fraud investigation
             </AnimatedText>
             <AnimatedText delay={0.4} as="li">
-              <strong>🆕 New Domain Risk</strong> — Sites less than 90 days old get enhanced scrutiny
+              <strong>New Domain Risk</strong> — Sites less than 90 days old get enhanced scrutiny
             </AnimatedText>
             <AnimatedText delay={0.5} as="li">
-              <strong>🌍 Geographic Anomalies</strong> — IP/location mismatches and geo-fencing violations
+              <strong>Geographic Anomalies</strong> — IP/location mismatches and geo-fencing violations
             </AnimatedText>
             <AnimatedText delay={0.6} as="li">
-              <strong>⚡ Traffic Spikes</strong> — Sudden visitor surges that indicate coordinated attacks
+              <strong>Traffic Spikes</strong> — Sudden visitor surges that indicate coordinated attacks
             </AnimatedText>
           </ul>
         </div>

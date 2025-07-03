@@ -2,7 +2,7 @@
 
 A production-quality, scroll-based presentation built with React, Vite, and Framer Motion. Features smooth animations, professional design, and an engaging user experience for showcasing merchant risk intelligence solutions.
 
-## 🚀 Features
+## Features
 
 ### Visual Excellence
 - **Modern Design System**: CSS custom properties with professional typography (Inter + JetBrains Mono)
@@ -24,7 +24,7 @@ A production-quality, scroll-based presentation built with React, Vite, and Fram
 - **ROI Metrics**: Compelling statistics with visual emphasis
 - **Implementation Timeline**: 30-day pilot roadmap
 
-## 🛠️ Setup & Installation
+## Setup & Installation
 
 1. **Clone and Install**
    ```bash
@@ -44,7 +44,7 @@ A production-quality, scroll-based presentation built with React, Vite, and Fram
    - The presentation will automatically display it on the hero slide
    - If the file doesn't exist, the logo will be hidden gracefully
 
-## 📁 Project Structure
+## Project Structure
 
 ```
 roe-slides/
@@ -59,7 +59,7 @@ roe-slides/
 └── package.json             # Dependencies
 ```
 
-## 🎨 Customization
+## Customization
 
 ### Brand Colors
 Update CSS custom properties in `src/index.css`:
@@ -84,7 +84,7 @@ Modify sections in `src/App.jsx`:
 - **Colors**: Update the color palette variables
 - **Animations**: Adjust Framer Motion transition timing
 
-## 🖼️ Assets
+## Assets
 
 ### Required Files
 - `public/architecture.png` - System architecture diagram
@@ -98,7 +98,7 @@ Modify sections in `src/App.jsx`:
 - **Logos**: Recommended size: 80px height for optimal display
 - **Diagrams**: Ensure good contrast for presentation viewing
 
-## 📱 Navigation
+## Navigation
 
 ### Scroll Navigation
 - **Mouse/Trackpad**: Scroll naturally through sections
@@ -125,7 +125,7 @@ Modify sections in `src/App.jsx`:
 13. **Pilot Plan** - 30-day timeline
 14. **Next Steps** - Call to action
 
-## 🔧 Development
+## Development
 
 ### Build for Production
 ```bash
@@ -142,7 +142,7 @@ npm run preview
 npm run lint
 ```
 
-## 📝 Content Guidelines
+## Content Guidelines
 
 ### Slide Structure
 - **Title**: Clear, action-oriented headlines
@@ -156,7 +156,7 @@ npm run lint
 - **Business-focused**: Emphasize ROI and business impact
 - **Action-oriented**: Clear next steps and calls-to-action
 
-## 🎯 Performance
+## Performance
 
 ### Optimizations
 - **Lazy Loading**: Images load as needed
@@ -169,7 +169,7 @@ npm run lint
 - **Mobile**: iOS Safari 14+, Chrome Mobile 88+
 - **Features**: CSS Custom Properties, Intersection Observer, Smooth Scrolling
 
-## 🚀 Deployment
+## Deployment
 
 ### Recommended Platforms
 - **Vercel**: `vercel deploy`
@@ -180,7 +180,7 @@ npm run lint
 ### Environment Setup
 No environment variables required - fully static deployment.
 
-## 🤝 Contributing
+## Contributing
 
 1. Fork the repository
 2. Create a feature branch: `git checkout -b feature-name`
@@ -188,7 +188,7 @@ No environment variables required - fully static deployment.
 4. Push to branch: `git push origin feature-name`
 5. Submit a pull request
 
-## 📄 License
+## License
 
 This project is proprietary software developed for Roe-AI presentation purposes.
 
