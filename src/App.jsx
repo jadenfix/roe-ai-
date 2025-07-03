@@ -155,14 +155,25 @@ export default function App() {
       {/* Hero Slide */}
       <Slide id="hero" className="hero">
         <div style={{ textAlign: 'center', maxWidth: '1000px' }}>
-          <AnimatedText delay={0} className="slide-title brand">
+          {/* Logo placeholder - will work when logo is added to public/ */}
+          <AnimatedText delay={0}>
+            <img
+              src="/roe_ai_logo.jpeg"
+              alt="Roe AI Logo"
+              className="roe-logo"
+              onError={(e) => {
+                e.target.style.display = 'none';
+              }}
+            />
+          </AnimatedText>
+          <AnimatedText delay={0.2} className="slide-title brand">
             Roe-AI Lite
           </AnimatedText>
-          <AnimatedText delay={0.2} className="slide-subtitle">
-            AcquirePay Proposal · Jaden Fix
+          <AnimatedText delay={0.4} className="slide-subtitle">
+            Merchant Risk Intelligence for AcquirePay
           </AnimatedText>
-          <AnimatedText delay={0.4} className="slide-text">
-            5-Minute Technical Demo
+          <AnimatedText delay={0.6} className="slide-text">
+            5-Minute Technical Demo · Jaden Fix, Solutions Engineer
           </AnimatedText>
         </div>
       </Slide>
@@ -171,10 +182,13 @@ export default function App() {
       <Slide id="contents">
         <div style={{ textAlign: 'center', maxWidth: '1200px' }}>
           <AnimatedText className="slide-title">
-            Presentation Overview
+            Executive Summary
           </AnimatedText>
           <AnimatedText delay={0.2} className="slide-text" style={{ fontSize: '1.8rem', lineHeight: 1.4 }}>
-            Challenge → Solution → ROI → Discovery → Technical Deep Dive → Implementation Plan
+            Challenge → AI Solution → Proven ROI → Technical Architecture → Implementation Roadmap
+          </AnimatedText>
+          <AnimatedText delay={0.4} className="slide-text" style={{ marginTop: '2rem', fontSize: '1.4rem', color: 'var(--brand-primary)', fontWeight: 600 }}>
+            From manual risk reviews to AI-powered compliance in 30 days
           </AnimatedText>
         </div>
       </Slide>
@@ -183,17 +197,20 @@ export default function App() {
       <Slide id="challenge">
         <div style={{ textAlign: 'center', maxWidth: '1000px' }}>
           <AnimatedText className="slide-title">
-            Hidden, Moving Targets
+            The $10M Problem
+          </AnimatedText>
+          <AnimatedText delay={0.1} className="slide-subtitle" style={{ color: 'var(--brand-primary)', marginBottom: '2rem' }}>
+            Why Manual Risk Reviews Are Failing
           </AnimatedText>
           <ul className="slide-list">
-            <AnimatedText delay={0.1} as="li">
-              20k+ merchant sites shift daily
-            </AnimatedText>
             <AnimatedText delay={0.2} as="li">
-              Manual reviews → analyst fatigue
+              <strong>20,000+ merchant sites</strong> change daily — impossible to monitor manually
             </AnimatedText>
             <AnimatedText delay={0.3} as="li">
-              Multi-million dollar fines possible
+              <strong>Analyst fatigue</strong> leads to missed violations and compliance gaps
+            </AnimatedText>
+            <AnimatedText delay={0.4} as="li">
+              <strong>Multi-million dollar fines</strong> from regulatory violations and chargebacks
             </AnimatedText>
           </ul>
         </div>
@@ -205,15 +222,18 @@ export default function App() {
           <AnimatedText className="slide-title brand">
             Roe-AI Lite Sentinel
           </AnimatedText>
+          <AnimatedText delay={0.1} className="slide-subtitle" style={{ color: 'var(--neutral-700)', marginBottom: '2rem' }}>
+            AI-Powered Risk Detection at Enterprise Scale
+          </AnimatedText>
           <ul className="slide-list">
-            <AnimatedText delay={0.1} as="li">
-              Nightly crawl + &lt;5 min delta detection
-            </AnimatedText>
             <AnimatedText delay={0.2} as="li">
-              SQL-first AI agents at scale
+              <strong>24/7 Automated Monitoring</strong> — Nightly full crawls + &lt;5 minute delta detection
             </AnimatedText>
             <AnimatedText delay={0.3} as="li">
-              Immutable audit trail in ClickHouse/S3
+              <strong>SQL-Native AI Agents</strong> — 200 pages/minute processing with familiar query syntax
+            </AnimatedText>
+            <AnimatedText delay={0.4} as="li">
+              <strong>Immutable Audit Trail</strong> — ClickHouse vectors + S3 compliance logging
             </AnimatedText>
           </ul>
         </div>
@@ -226,14 +246,17 @@ export default function App() {
             80%
           </AnimatedText>
           <AnimatedText delay={0.2} className="stat-label">
-            fines avoided
+            Compliance Violations Prevented
           </AnimatedText>
-          <div style={{ display: 'flex', gap: '3rem', justifyContent: 'center', marginTop: '2rem', flexWrap: 'wrap' }}>
-            <AnimatedText delay={0.4} style={{ color: 'white', fontSize: '1.5rem', opacity: 0.9 }}>
-              75% fewer analyst hours
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '2rem', marginTop: '3rem' }}>
+            <AnimatedText delay={0.4} className="stat-sub">
+              <strong>75%</strong> reduction in analyst hours
             </AnimatedText>
-            <AnimatedText delay={0.6} style={{ color: 'white', fontSize: '1.5rem', opacity: 0.9 }}>
-              15-20% fraud reduction
+            <AnimatedText delay={0.6} className="stat-sub">
+              <strong>15-20%</strong> fraud detection improvement
+            </AnimatedText>
+            <AnimatedText delay={0.8} className="stat-sub">
+              <strong>&lt;90 days</strong> to positive ROI
             </AnimatedText>
           </div>
         </div>
@@ -243,17 +266,20 @@ export default function App() {
       <Slide id="discovery">
         <div style={{ textAlign: 'center', maxWidth: '1000px' }}>
           <AnimatedText className="slide-title">
+            Fast-Track Implementation
+          </AnimatedText>
+          <AnimatedText delay={0.1} className="slide-subtitle" style={{ color: 'var(--brand-primary)', marginBottom: '2rem' }}>
             2-Hour Discovery Workshop
           </AnimatedText>
           <ul className="slide-list">
-            <AnimatedText delay={0.1} as="li">
-              Map existing workflows & KPIs
-            </AnimatedText>
             <AnimatedText delay={0.2} as="li">
-              Sandbox environment spin-up
+              <strong>Workflow Mapping</strong> — Document existing processes & identify integration points
             </AnimatedText>
             <AnimatedText delay={0.3} as="li">
-              First alerts delivered in 7 days
+              <strong>KPI Definition</strong> — Set success metrics & compliance benchmarks
+            </AnimatedText>
+            <AnimatedText delay={0.4} as="li">
+              <strong>Sandbox Launch</strong> — Live environment with first alerts in 7 days
             </AnimatedText>
           </ul>
         </div>
@@ -263,20 +289,23 @@ export default function App() {
       <Slide id="gaps">
         <div style={{ textAlign: 'center', maxWidth: '1000px' }}>
           <AnimatedText className="slide-title">
-            Critical Information Gaps
+            Pre-Implementation Checklist
+          </AnimatedText>
+          <AnimatedText delay={0.1} className="slide-subtitle" style={{ color: 'var(--brand-primary)', marginBottom: '2rem' }}>
+            Critical Data Requirements
           </AnimatedText>
           <ul className="slide-list">
-            <AnimatedText delay={0.1} as="li">
-              SKU-level data feeds missing
-            </AnimatedText>
             <AnimatedText delay={0.2} as="li">
-              Policy PDF locations unknown
+              <strong>SKU-Level Data Feeds</strong> — Product catalogs for content analysis
             </AnimatedText>
             <AnimatedText delay={0.3} as="li">
-              No versioned audit logs
+              <strong>Policy Document Locations</strong> — Terms of service & compliance PDFs
             </AnimatedText>
             <AnimatedText delay={0.4} as="li">
-              Limited historical training labels
+              <strong>Historical Training Data</strong> — Past violation examples for model tuning
+            </AnimatedText>
+            <AnimatedText delay={0.5} as="li">
+              <strong>Audit Trail Infrastructure</strong> — Versioned compliance logging setup
             </AnimatedText>
           </ul>
         </div>
@@ -286,18 +315,24 @@ export default function App() {
       <Slide id="matrix">
         <div style={{ textAlign: 'center', maxWidth: '1000px' }}>
           <AnimatedText className="slide-title">
+            Risk Prioritization Framework
+          </AnimatedText>
+          <AnimatedText delay={0.1} className="slide-subtitle" style={{ color: 'var(--brand-primary)', marginBottom: '2rem' }}>
             Impact × Frequency Matrix
           </AnimatedText>
           <AnimatedText delay={0.2}>
-            <img
-              src="/matrix.svg"
-              alt="Risk prioritization matrix"
-              className="slide-image"
-              style={{ width: '80%', maxWidth: '600px' }}
-            />
-          </AnimatedText>
-          <AnimatedText delay={0.4} className="slide-text" style={{ marginTop: '1rem' }}>
-            Vape & CBD (High-High) • Sanctions (High-Low)
+            <div className="matrix-container">
+              <img
+                src="/matrix.svg"
+                alt="Risk prioritization matrix showing high-impact, high-frequency violations"
+                className="slide-image"
+                style={{ width: '100%', maxWidth: '600px' }}
+              />
+              <div className="matrix-description">
+                <strong>Strategic Focus:</strong> High-impact, high-frequency risks like vape/kratom sales 
+                and sanctions violations get immediate AI attention, while low-risk items use automated screening.
+              </div>
+            </div>
           </AnimatedText>
         </div>
       </Slide>
@@ -306,23 +341,26 @@ export default function App() {
       <Slide id="triggers">
         <div style={{ textAlign: 'center', maxWidth: '1000px' }}>
           <AnimatedText className="slide-title">
-            Top Red-Flag Triggers
+            Automated Detection Rules
+          </AnimatedText>
+          <AnimatedText delay={0.1} className="slide-subtitle" style={{ color: 'var(--brand-primary)', marginBottom: '2rem' }}>
+            Out-of-the-Box Risk Triggers
           </AnimatedText>
           <ul className="slide-list" style={{ fontSize: '1.8rem' }}>
-            <AnimatedText delay={0.1} as="li">
-              ① Prohibited keywords detection
-            </AnimatedText>
             <AnimatedText delay={0.2} as="li">
-              ② Price volatility &gt;40%
+              <strong>🚫 Prohibited Keywords</strong> — Vape, kratom, CBD, and restricted substance detection
             </AnimatedText>
             <AnimatedText delay={0.3} as="li">
-              ③ Domain age &lt;90 days
+              <strong>📈 Price Volatility</strong> — Swings greater than 40% trigger fraud investigation
             </AnimatedText>
             <AnimatedText delay={0.4} as="li">
-              ④ Geographic/IP mismatches
+              <strong>🆕 New Domain Risk</strong> — Sites less than 90 days old get enhanced scrutiny
             </AnimatedText>
             <AnimatedText delay={0.5} as="li">
-              ⑤ Anomalous traffic spikes
+              <strong>🌍 Geographic Anomalies</strong> — IP/location mismatches and geo-fencing violations
+            </AnimatedText>
+            <AnimatedText delay={0.6} as="li">
+              <strong>⚡ Traffic Spikes</strong> — Sudden visitor surges that indicate coordinated attacks
             </AnimatedText>
           </ul>
         </div>
@@ -332,12 +370,15 @@ export default function App() {
       <Slide id="architecture">
         <div style={{ textAlign: 'center', maxWidth: '1200px' }}>
           <AnimatedText className="slide-title">
-            System Architecture Overview
+            Enterprise Architecture
+          </AnimatedText>
+          <AnimatedText delay={0.1} className="slide-subtitle" style={{ color: 'var(--brand-primary)', marginBottom: '2rem' }}>
+            Battle-Tested at Scale
           </AnimatedText>
           <AnimatedText delay={0.2}>
             <img
               src="/architecture.png"
-              alt="Roe-AI Lite system architecture"
+              alt="Roe-AI Lite system architecture showing batch and real-time processing pipelines"
               className="slide-image"
               style={{ width: '90%', maxWidth: '1000px' }}
             />
@@ -351,39 +392,39 @@ export default function App() {
           <AnimatedText delay={0.1}>
             <img
               src="/architecture.png"
-              alt="Technical architecture diagram"
+              alt="Technical architecture diagram with detailed component breakdown"
               className="slide-image"
               style={{ width: '100%' }}
             />
           </AnimatedText>
           <div className="feature-card">
             <AnimatedText delay={0.2} className="slide-title" style={{ fontSize: '2rem', marginBottom: '1.5rem' }}>
-              Technical Deep Dive
+              Technical Implementation
             </AnimatedText>
             <ul style={{ listStyle: 'none', padding: 0, fontSize: '1.1rem', lineHeight: 1.6 }}>
               <AnimatedText delay={0.3} as="li" style={{ marginBottom: '1rem' }}>
-                <strong style={{ color: 'var(--brand-primary)' }}>Access Prerequisites:</strong><br/>
-                VPC peering & credential management
+                <strong style={{ color: 'var(--brand-primary)' }}>Infrastructure Prerequisites:</strong><br/>
+                VPC peering, IAM roles, and secure credential management
               </AnimatedText>
               <AnimatedText delay={0.4} as="li" style={{ marginBottom: '1rem' }}>
-                <strong style={{ color: 'var(--brand-primary)' }}>CRM Integration:</strong><br/>
-                Nightly SFTP manifest → Airflow DAG triggers
+                <strong style={{ color: 'var(--brand-primary)' }}>Data Ingestion Pipeline:</strong><br/>
+                Nightly SFTP manifest uploads trigger Airflow DAG orchestration
               </AnimatedText>
               <AnimatedText delay={0.5} as="li" style={{ marginBottom: '1rem' }}>
-                <strong style={{ color: 'var(--brand-primary)' }}>Real-time Pipeline:</strong><br/>
-                SNS topics → Fargate workers (&lt;5m P99)
+                <strong style={{ color: 'var(--brand-primary)' }}>Real-Time Processing:</strong><br/>
+                SNS event triggers → Fargate containers (99th percentile &lt;5 minutes)
               </AnimatedText>
               <AnimatedText delay={0.6} as="li" style={{ marginBottom: '1rem' }}>
-                <strong style={{ color: 'var(--brand-primary)' }}>AI Processing:</strong><br/>
-                200 pages/min parallel LLM + SQL agents
+                <strong style={{ color: 'var(--brand-primary)' }}>AI Agent Farm:</strong><br/>
+                200 pages/minute parallel processing with LLM + SQL hybrid agents
               </AnimatedText>
               <AnimatedText delay={0.7} as="li" style={{ marginBottom: '1rem' }}>
-                <strong style={{ color: 'var(--brand-primary)' }}>Data Storage:</strong><br/>
-                ClickHouse vectors + S3/MinIO audit logs
+                <strong style={{ color: 'var(--brand-primary)' }}>Data Storage Strategy:</strong><br/>
+                ClickHouse for vector embeddings + S3/MinIO for immutable audit logs
               </AnimatedText>
               <AnimatedText delay={0.8} as="li">
                 <strong style={{ color: 'var(--brand-primary)' }}>Alert Distribution:</strong><br/>
-                JSON → Snowflake → Tableau/Slack/Jira
+                JSON risk scores → Snowflake → Tableau dashboards/Slack/Jira tickets
               </AnimatedText>
             </ul>
           </div>
@@ -394,17 +435,24 @@ export default function App() {
       <Slide id="sql" className="dark-bg">
         <div style={{ textAlign: 'center', maxWidth: '1000px' }}>
           <AnimatedText className="slide-title white">
+            Developer-Friendly Implementation
+          </AnimatedText>
+          <AnimatedText delay={0.1} className="slide-subtitle" style={{ color: 'var(--brand-light)', marginBottom: '2rem' }}>
             2-Line Risk Query
           </AnimatedText>
           <AnimatedText delay={0.2}>
             <div className="code-container">
               <pre>
-                <code style={{ color: '#ff6b6b' }}>SELECT</code> <code style={{ color: '#ffd93d' }}>id</code>,{'\n'}
-                {'       '}<code style={{ color: '#6bcf7f' }}>AI_RISK</code>(<code style={{ color: '#ffd93d' }}>page_html</code>) <code style={{ color: '#ff6b6b' }}>AS</code> <code style={{ color: '#ffd93d' }}>risk</code>{'\n'}
-                <code style={{ color: '#ff6b6b' }}>FROM</code> <code style={{ color: '#74b9ff' }}>merchants_today</code>{'\n'}
-                <code style={{ color: '#ff6b6b' }}>WHERE</code> <code style={{ color: '#ffd93d' }}>risk</code> <code style={{ color: '#ff7675' }}>&gt;</code> <code style={{ color: '#a29bfe' }}>0.8</code>;
+                <code style={{ color: '#ff6b6b' }}>SELECT</code> <code style={{ color: '#ffd93d' }}>merchant_id</code>,{'\n'}
+                {'       '}<code style={{ color: '#6bcf7f' }}>AI_RISK</code>(<code style={{ color: '#ffd93d' }}>page_content</code>) <code style={{ color: '#ff6b6b' }}>AS</code> <code style={{ color: '#ffd93d' }}>risk_score</code>{'\n'}
+                <code style={{ color: '#ff6b6b' }}>FROM</code> <code style={{ color: '#74b9ff' }}>merchants_crawl_today</code>{'\n'}
+                <code style={{ color: '#ff6b6b' }}>WHERE</code> <code style={{ color: '#ffd93d' }}>risk_score</code> <code style={{ color: '#ff7675' }}>&gt;</code> <code style={{ color: '#a29bfe' }}>0.8</code>{'\n'}
+                <code style={{ color: '#ff6b6b' }}>ORDER BY</code> <code style={{ color: '#ffd93d' }}>risk_score</code> <code style={{ color: '#ff6b6b' }}>DESC</code>;
               </pre>
             </div>
+          </AnimatedText>
+          <AnimatedText delay={0.4} className="slide-text" style={{ color: 'var(--neutral-300)', marginTop: '2rem' }}>
+            <strong>No Python knowledge required</strong> — Your existing SQL analysts can build and modify risk rules
           </AnimatedText>
         </div>
       </Slide>
@@ -413,24 +461,27 @@ export default function App() {
       <Slide id="pilot">
         <div style={{ textAlign: 'center', maxWidth: '1200px' }}>
           <AnimatedText className="slide-title">
-            30-Day Pilot Roadmap
+            30-Day Pilot Implementation
+          </AnimatedText>
+          <AnimatedText delay={0.1} className="slide-subtitle" style={{ color: 'var(--brand-primary)', marginBottom: '2rem' }}>
+            Proven Deployment Timeline
           </AnimatedText>
           <div className="timeline">
-            <AnimatedText delay={0.1} className="timeline-item">
-              <h3 style={{ color: 'var(--brand-primary)', marginBottom: '1rem' }}>Week 1</h3>
-              <p>Access setup & rule configuration</p>
-            </AnimatedText>
             <AnimatedText delay={0.2} className="timeline-item">
-              <h3 style={{ color: 'var(--brand-primary)', marginBottom: '1rem' }}>Week 2</h3>
-              <p>First automated nightly crawl</p>
+              <h3>Week 1</h3>
+              <p><strong>Foundation Setup</strong><br/>Access provisioning, rule configuration, and initial data pipeline</p>
             </AnimatedText>
             <AnimatedText delay={0.3} className="timeline-item">
-              <h3 style={{ color: 'var(--brand-primary)', marginBottom: '1rem' }}>Week 3</h3>
-              <p>Live dashboards & alerts</p>
+              <h3>Week 2</h3>
+              <p><strong>First Crawl Launch</strong><br/>Automated nightly processing with baseline risk scoring</p>
             </AnimatedText>
             <AnimatedText delay={0.4} className="timeline-item">
-              <h3 style={{ color: 'var(--brand-primary)', marginBottom: '1rem' }}>Week 4</h3>
-              <p>KPI review & expansion planning</p>
+              <h3>Week 3</h3>
+              <p><strong>Dashboard Activation</strong><br/>Live monitoring, alerts, and analyst training sessions</p>
+            </AnimatedText>
+            <AnimatedText delay={0.5} className="timeline-item">
+              <h3>Week 4</h3>
+              <p><strong>Optimization & Scale</strong><br/>KPI review, rule tuning, and production expansion planning</p>
             </AnimatedText>
           </div>
         </div>
@@ -440,18 +491,24 @@ export default function App() {
       <Slide id="thanks">
         <div style={{ textAlign: 'center', maxWidth: '1000px' }}>
           <AnimatedText className="slide-title">
-            Thank You & Next Steps
+            Ready to Eliminate Compliance Risk?
+          </AnimatedText>
+          <AnimatedText delay={0.1} className="slide-subtitle" style={{ color: 'var(--brand-primary)', marginBottom: '2rem' }}>
+            Next Steps
           </AnimatedText>
           <ul className="slide-list">
-            <AnimatedText delay={0.1} as="li">
-              Schedule technical deep dive session
-            </AnimatedText>
             <AnimatedText delay={0.2} as="li">
-              Review implementation documentation
+              <strong>Technical Deep Dive Session</strong> — 30-minute architecture walkthrough with your team
+            </AnimatedText>
+            <AnimatedText delay={0.3} as="li">
+              <strong>POC Environment Setup</strong> — Live sandbox with your data for immediate testing
             </AnimatedText>
           </ul>
-          <AnimatedText delay={0.4} className="slide-text" style={{ marginTop: '2rem', fontSize: '1.2rem' }}>
-            Book your 30-minute technical consultation
+          <AnimatedText delay={0.5} className="slide-text" style={{ marginTop: '3rem', fontSize: '1.3rem', color: 'var(--brand-primary)', fontWeight: 700 }}>
+            Let's turn your biggest compliance challenge into your competitive advantage
+          </AnimatedText>
+          <AnimatedText delay={0.6} className="slide-text" style={{ marginTop: '1rem' }}>
+            <strong>Jaden Fix</strong> · Solutions Engineer · roe-ai.com
           </AnimatedText>
         </div>
       </Slide>
