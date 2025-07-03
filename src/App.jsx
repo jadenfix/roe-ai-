@@ -1,242 +1,460 @@
 // App.jsx
-import React from "react";
-import {
-  Deck,
-  Slide,
-  Heading,
-  Text,
-  FlexBox,
-  CodePane,
-  Box,
-} from "spectacle";
-import { motion } from "framer-motion";
+import React, { useState, useEffect, useRef } from 'react';
+import { motion, useInView, useScroll, useSpring } from 'framer-motion';
 
-/* ---------- tiny helper for consistent fade-in --------- */
-const Fade = ({ delay = 0, children }) => (
-  <motion.div
-    initial={{ opacity: 0, y: 20 }}
-    animate={{ opacity: 1, y: 0 }}
-    transition={{ duration: 0.5, delay }}
-  >
-    {children}
-  </motion.div>
-);
+// Custom hook for intersection observer
+const useIntersectionObserver = (options = {}) => {
+  const [entries, setEntries] = useState([]);
+  const observer = useRef(null);
 
-/* ---------- brand theme -------------------------------- */
-const theme = {
-  fonts: { header: "Inter, sans-serif", text: "Inter, sans-serif" },
-  colors: { brand: "#E44E00", text: "#222", bg: "#fff", dark: "#1e1e1e" },
+  useEffect(() => {
+    if (observer.current) observer.current.disconnect();
+
+    observer.current = new IntersectionObserver((observedEntries) => {
+      setEntries(observedEntries);
+    }, options);
+
+    const { current: currentObserver } = observer;
+    return () => currentObserver.disconnect();
+  }, [options]);
+
+  const observe = (element) => {
+    if (element && observer.current) {
+      observer.current.observe(element);
+    }
+  };
+
+  const unobserve = (element) => {
+    if (element && observer.current) {
+      observer.current.unobserve(element);
+    }
+  };
+
+  return [entries, { observe, unobserve }];
 };
 
-/* ---------- 25 000 ms = auto-advance every 25 s -------- */
-const AUTO = 25_000;
+// Slide component with animations
+const Slide = ({ children, className = '', id, ...props }) => {
+  const ref = useRef(null);
+  const isInView = useInView(ref, { threshold: 0.3, once: false });
 
-export default function App() {
   return (
-    <Deck theme={theme} autoPlay={AUTO} transitionEffect="fade">
-      {/* Slide 0 – Title & Hero */}
-      <Slide backgroundColor="bg">
-        <Fade>
-          <Heading color="brand" fontSize="h1">Roe-AI Lite</Heading>
-        </Fade>
-        <Fade delay={0.3}>
-          <Text fontSize={42}>AcquirePay Proposal · Jaden Fix</Text>
-        </Fade>
-        <Fade delay={0.6}>
-          <Text fontSize={28}>5-Minute Demo</Text>
-        </Fade>
+    <motion.section
+      ref={ref}
+      id={id}
+      className={`slide-container ${className}`}
+      initial={{ opacity: 0 }}
+      animate={{ opacity: isInView ? 1 : 0.3 }}
+      transition={{ duration: 0.6, ease: 'easeOut' }}
+      {...props}
+    >
+      <div className="slide-content">
+        {children}
+      </div>
+    </motion.section>
+  );
+};
+
+// Animated text component
+const AnimatedText = ({ children, delay = 0, className = '', ...props }) => {
+  const ref = useRef(null);
+  const isInView = useInView(ref, { threshold: 0.3, once: true });
+
+  return (
+    <motion.div
+      ref={ref}
+      className={className}
+      initial={{ opacity: 0, y: 30 }}
+      animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
+      transition={{ duration: 0.6, delay, ease: 'easeOut' }}
+      {...props}
+    >
+      {children}
+    </motion.div>
+  );
+};
+
+// Navigation component
+const Navigation = ({ activeSection }) => {
+  const slides = [
+    { id: 'hero', label: 'Hero' },
+    { id: 'contents', label: 'Contents' },
+    { id: 'challenge', label: 'Challenge' },
+    { id: 'solution', label: 'Solution' },
+    { id: 'roi', label: 'ROI' },
+    { id: 'discovery', label: 'Discovery' },
+    { id: 'gaps', label: 'Gaps' },
+    { id: 'matrix', label: 'Matrix' },
+    { id: 'triggers', label: 'Triggers' },
+    { id: 'architecture', label: 'Architecture' },
+    { id: 'deepdive', label: 'Deep Dive' },
+    { id: 'sql', label: 'SQL' },
+    { id: 'pilot', label: 'Pilot' },
+    { id: 'thanks', label: 'Thanks' }
+  ];
+
+  const scrollToSection = (id) => {
+    const element = document.getElementById(id);
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
+  return (
+    <div className="nav-indicator">
+      {slides.map((slide) => (
+        <div
+          key={slide.id}
+          className={`nav-dot ${activeSection === slide.id ? 'active' : ''}`}
+          onClick={() => scrollToSection(slide.id)}
+          title={slide.label}
+        />
+      ))}
+    </div>
+  );
+};
+
+// Progress bar component
+const ProgressBar = () => {
+  const { scrollYProgress } = useScroll();
+  const scaleX = useSpring(scrollYProgress, {
+    stiffness: 100,
+    damping: 30,
+    restDelta: 0.001
+  });
+
+  return (
+    <motion.div
+      className="progress-bar"
+      style={{ scaleX, transformOrigin: '0%' }}
+    />
+  );
+};
+
+// Main App component
+export default function App() {
+  const [activeSection, setActiveSection] = useState('hero');
+  
+  const [entries] = useIntersectionObserver({
+    threshold: 0.3,
+    rootMargin: '-20% 0px -20% 0px'
+  });
+
+  useEffect(() => {
+    const visibleEntry = entries.find(entry => entry.isIntersecting);
+    if (visibleEntry) {
+      setActiveSection(visibleEntry.target.id);
+    }
+  }, [entries]);
+
+  return (
+    <>
+      <ProgressBar />
+      <Navigation activeSection={activeSection} />
+      
+      {/* Hero Slide */}
+      <Slide id="hero" className="hero">
+        <div style={{ textAlign: 'center', maxWidth: '1000px' }}>
+          <AnimatedText delay={0} className="slide-title brand">
+            Roe-AI Lite
+          </AnimatedText>
+          <AnimatedText delay={0.2} className="slide-subtitle">
+            AcquirePay Proposal · Jaden Fix
+          </AnimatedText>
+          <AnimatedText delay={0.4} className="slide-text">
+            5-Minute Technical Demo
+          </AnimatedText>
+        </div>
       </Slide>
 
-      {/* Slide 1 – Contents */}
-      <Slide>
-        <Heading>Contents</Heading>
-        <Fade delay={0.2}>
-          <Text fontSize={32}>
-            1 Challenge · 2 Solution · 3 ROI · 4 Discovery · 5 Gaps · 6 Matrix · 7 Red Flags · 8 Arch · 9 Deep Dive · 10 SQL · 11 Pilot
-          </Text>
-        </Fade>
+      {/* Contents Slide */}
+      <Slide id="contents">
+        <div style={{ textAlign: 'center', maxWidth: '1200px' }}>
+          <AnimatedText className="slide-title">
+            Presentation Overview
+          </AnimatedText>
+          <AnimatedText delay={0.2} className="slide-text" style={{ fontSize: '1.8rem', lineHeight: 1.4 }}>
+            Challenge → Solution → ROI → Discovery → Technical Deep Dive → Implementation Plan
+          </AnimatedText>
+        </div>
       </Slide>
 
-      {/* Slide 2 – The Challenge */}
-      <Slide>
-        <Heading>Hidden, Moving Targets</Heading>
-        <Fade>
-          <ul style={{ fontSize: "36px", lineHeight: 1.4 }}>
-            <li>20k+ sites shift daily</li>
-            <li>Manual reviews → fatigue</li>
-            <li>Multi-million fines possible</li>
+      {/* Challenge Slide */}
+      <Slide id="challenge">
+        <div style={{ textAlign: 'center', maxWidth: '1000px' }}>
+          <AnimatedText className="slide-title">
+            Hidden, Moving Targets
+          </AnimatedText>
+          <ul className="slide-list">
+            <AnimatedText delay={0.1} as="li">
+              20k+ merchant sites shift daily
+            </AnimatedText>
+            <AnimatedText delay={0.2} as="li">
+              Manual reviews → analyst fatigue
+            </AnimatedText>
+            <AnimatedText delay={0.3} as="li">
+              Multi-million dollar fines possible
+            </AnimatedText>
           </ul>
-        </Fade>
+        </div>
       </Slide>
 
-      {/* Slide 3 – Our Solution */}
-      <Slide>
-        <Heading color="brand">Roe-AI Lite Sentinel</Heading>
-        <Fade>
-          <ul style={{ fontSize: "36px", lineHeight: 1.4 }}>
-            <li>Nightly crawl + &lt;5 min delta</li>
-            <li>SQL-first AI agents</li>
-            <li>Audit in ClickHouse/S3</li>
+      {/* Solution Slide */}
+      <Slide id="solution">
+        <div style={{ textAlign: 'center', maxWidth: '1000px' }}>
+          <AnimatedText className="slide-title brand">
+            Roe-AI Lite Sentinel
+          </AnimatedText>
+          <ul className="slide-list">
+            <AnimatedText delay={0.1} as="li">
+              Nightly crawl + &lt;5 min delta detection
+            </AnimatedText>
+            <AnimatedText delay={0.2} as="li">
+              SQL-first AI agents at scale
+            </AnimatedText>
+            <AnimatedText delay={0.3} as="li">
+              Immutable audit trail in ClickHouse/S3
+            </AnimatedText>
           </ul>
-        </Fade>
+        </div>
       </Slide>
 
-      {/* Slide 4 – ROI They Can't Ignore */}
-      <Slide backgroundColor="brand">
-        <FlexBox height="100%" alignItems="center" justifyContent="center" flexDirection="column">
-          <Heading color="bg" fontSize={200}>80%</Heading>
-          <Text color="bg" fontSize={36}>fines avoided</Text>
-          <Fade delay={0.3}>
-            <Text color="bg" fontSize={28}>75% fewer analyst hours</Text>
-          </Fade>
-          <Fade delay={0.6}>
-            <Text color="bg" fontSize={28}>15-20% fraud reduction</Text>
-          </Fade>
-        </FlexBox>
+      {/* ROI Slide */}
+      <Slide id="roi" className="brand-bg">
+        <div style={{ textAlign: 'center', maxWidth: '1000px' }}>
+          <AnimatedText className="stat-number">
+            80%
+          </AnimatedText>
+          <AnimatedText delay={0.2} className="stat-label">
+            fines avoided
+          </AnimatedText>
+          <div style={{ display: 'flex', gap: '3rem', justifyContent: 'center', marginTop: '2rem', flexWrap: 'wrap' }}>
+            <AnimatedText delay={0.4} style={{ color: 'white', fontSize: '1.5rem', opacity: 0.9 }}>
+              75% fewer analyst hours
+            </AnimatedText>
+            <AnimatedText delay={0.6} style={{ color: 'white', fontSize: '1.5rem', opacity: 0.9 }}>
+              15-20% fraud reduction
+            </AnimatedText>
+          </div>
+        </div>
       </Slide>
 
-      {/* Slide 5 – Discovery Kick-Off */}
-      <Slide>
-        <Heading>2-Hour Workshop</Heading>
-        <Fade>
-          <ul style={{ fontSize: "36px", lineHeight: 1.4 }}>
-            <li>Map workflows & KPIs</li>
-            <li>Sandbox spin-up</li>
-            <li>First alerts in 7 days</li>
+      {/* Discovery Slide */}
+      <Slide id="discovery">
+        <div style={{ textAlign: 'center', maxWidth: '1000px' }}>
+          <AnimatedText className="slide-title">
+            2-Hour Discovery Workshop
+          </AnimatedText>
+          <ul className="slide-list">
+            <AnimatedText delay={0.1} as="li">
+              Map existing workflows & KPIs
+            </AnimatedText>
+            <AnimatedText delay={0.2} as="li">
+              Sandbox environment spin-up
+            </AnimatedText>
+            <AnimatedText delay={0.3} as="li">
+              First alerts delivered in 7 days
+            </AnimatedText>
           </ul>
-        </Fade>
+        </div>
       </Slide>
 
-      {/* Slide 6 – Critical Info Gaps */}
-      <Slide>
-        <Heading>Critical Info Gaps</Heading>
-        <Fade>
-          <ul style={{ fontSize: "36px", lineHeight: 1.4 }}>
-            <li>SKU feeds missing</li>
-            <li>PDF paths unknown</li>
-            <li>No versioned logs</li>
-            <li>Historical labels scarce</li>
+      {/* Critical Info Gaps Slide */}
+      <Slide id="gaps">
+        <div style={{ textAlign: 'center', maxWidth: '1000px' }}>
+          <AnimatedText className="slide-title">
+            Critical Information Gaps
+          </AnimatedText>
+          <ul className="slide-list">
+            <AnimatedText delay={0.1} as="li">
+              SKU-level data feeds missing
+            </AnimatedText>
+            <AnimatedText delay={0.2} as="li">
+              Policy PDF locations unknown
+            </AnimatedText>
+            <AnimatedText delay={0.3} as="li">
+              No versioned audit logs
+            </AnimatedText>
+            <AnimatedText delay={0.4} as="li">
+              Limited historical training labels
+            </AnimatedText>
           </ul>
-        </Fade>
+        </div>
       </Slide>
 
-      {/* Slide 7 – Impact × Frequency Matrix */}
-      <Slide>
-        <Heading>Impact × Frequency</Heading>
-        <Fade>
-          <img
-            src="/matrix.svg"
-            alt="2×2 heat-map"
-            style={{ width: "70%" }}
-          />
-        </Fade>
-        <Fade delay={0.3}>
-          <Text fontSize={24}>Vape & CBD (Hi-Hi) • Sanctions (Hi-Lo)</Text>
-        </Fade>
+      {/* Matrix Slide */}
+      <Slide id="matrix">
+        <div style={{ textAlign: 'center', maxWidth: '1000px' }}>
+          <AnimatedText className="slide-title">
+            Impact × Frequency Matrix
+          </AnimatedText>
+          <AnimatedText delay={0.2}>
+            <img
+              src="/matrix.svg"
+              alt="Risk prioritization matrix"
+              className="slide-image"
+              style={{ width: '80%', maxWidth: '600px' }}
+            />
+          </AnimatedText>
+          <AnimatedText delay={0.4} className="slide-text" style={{ marginTop: '1rem' }}>
+            Vape & CBD (High-High) • Sanctions (High-Low)
+          </AnimatedText>
+        </div>
       </Slide>
 
-      {/* Slide 8 – Top Red-Flag Triggers */}
-      <Slide>
-        <Heading>Top Red-Flag Triggers</Heading>
-        <Fade>
-          <ul style={{ fontSize: "32px", lineHeight: 1.4 }}>
-            <li>① Prohibited keywords</li>
-            <li>② Price swings &gt;40%</li>
-            <li>③ Domain age &lt;90 d</li>
-            <li>④ Geo/IP mismatch</li>
-            <li>⑤ Traffic spikes</li>
+      {/* Red Flag Triggers Slide */}
+      <Slide id="triggers">
+        <div style={{ textAlign: 'center', maxWidth: '1000px' }}>
+          <AnimatedText className="slide-title">
+            Top Red-Flag Triggers
+          </AnimatedText>
+          <ul className="slide-list" style={{ fontSize: '1.8rem' }}>
+            <AnimatedText delay={0.1} as="li">
+              ① Prohibited keywords detection
+            </AnimatedText>
+            <AnimatedText delay={0.2} as="li">
+              ② Price volatility &gt;40%
+            </AnimatedText>
+            <AnimatedText delay={0.3} as="li">
+              ③ Domain age &lt;90 days
+            </AnimatedText>
+            <AnimatedText delay={0.4} as="li">
+              ④ Geographic/IP mismatches
+            </AnimatedText>
+            <AnimatedText delay={0.5} as="li">
+              ⑤ Anomalous traffic spikes
+            </AnimatedText>
           </ul>
-        </Fade>
+        </div>
       </Slide>
 
-      {/* Slide 9 – Architecture at a Glance */}
-      <Slide>
-        <Heading>Architecture at a Glance</Heading>
-        <Fade>
-          <img
-            src="/architecture.png"
-            alt="pipeline"
-            style={{ width: "80%", border: "1px solid #ccc" }}
-          />
-        </Fade>
+      {/* Architecture Overview Slide */}
+      <Slide id="architecture">
+        <div style={{ textAlign: 'center', maxWidth: '1200px' }}>
+          <AnimatedText className="slide-title">
+            System Architecture Overview
+          </AnimatedText>
+          <AnimatedText delay={0.2}>
+            <img
+              src="/architecture.png"
+              alt="Roe-AI Lite system architecture"
+              className="slide-image"
+              style={{ width: '90%', maxWidth: '1000px' }}
+            />
+          </AnimatedText>
+        </div>
       </Slide>
 
-      {/* Slide 10 – Technical Deep Dive */}
-      <Slide>
-        <FlexBox width="100%" justifyContent="space-between" alignItems="flex-start">
-          {/* Left: Architecture image */}
-          <img
-            src="/architecture.png"
-            alt="pipeline diagram"
-            style={{ width: "60%", border: "1px solid #ccc" }}
-          />
-
-          {/* Right: Call-outs */}
-          <Box width="35%" padding="0 1rem">
-            <Heading fontSize="28px" marginBottom="1rem">Technical Deep Dive</Heading>
-            <ul style={{ fontSize: "20px", lineHeight: 1.5, listStyle: "none", padding: 0 }}>
-              <li style={{ marginBottom: "0.5rem" }}>
-                <strong>Access prereqs</strong>: VPC peering & creds
-              </li>
-              <li style={{ marginBottom: "0.5rem" }}>
-                <strong>CRM manifest</strong>: nightly SFTP → Airflow DAG
-              </li>
-              <li style={{ marginBottom: "0.5rem" }}>
-                <strong>Real-time</strong>: SNS → Fargate (&lt;5m P99)
-              </li>
-              <li style={{ marginBottom: "0.5rem" }}>
-                <strong>Roe AI Lite</strong>: 200 ppm, SQL + LLM agents
-              </li>
-              <li style={{ marginBottom: "0.5rem" }}>
-                <strong>Audit store</strong>: ClickHouse vecs + S3/MinIO logs
-              </li>
-              <li style={{ marginBottom: "0.5rem" }}>
-                <strong>Alerts</strong>: JSON → Snowflake → Tableau/Slack/Jira
-              </li>
+      {/* Technical Deep Dive Slide */}
+      <Slide id="deepdive">
+        <div className="tech-deep-dive">
+          <AnimatedText delay={0.1}>
+            <img
+              src="/architecture.png"
+              alt="Technical architecture diagram"
+              className="slide-image"
+              style={{ width: '100%' }}
+            />
+          </AnimatedText>
+          <div className="feature-card">
+            <AnimatedText delay={0.2} className="slide-title" style={{ fontSize: '2rem', marginBottom: '1.5rem' }}>
+              Technical Deep Dive
+            </AnimatedText>
+            <ul style={{ listStyle: 'none', padding: 0, fontSize: '1.1rem', lineHeight: 1.6 }}>
+              <AnimatedText delay={0.3} as="li" style={{ marginBottom: '1rem' }}>
+                <strong style={{ color: 'var(--brand-primary)' }}>Access Prerequisites:</strong><br/>
+                VPC peering & credential management
+              </AnimatedText>
+              <AnimatedText delay={0.4} as="li" style={{ marginBottom: '1rem' }}>
+                <strong style={{ color: 'var(--brand-primary)' }}>CRM Integration:</strong><br/>
+                Nightly SFTP manifest → Airflow DAG triggers
+              </AnimatedText>
+              <AnimatedText delay={0.5} as="li" style={{ marginBottom: '1rem' }}>
+                <strong style={{ color: 'var(--brand-primary)' }}>Real-time Pipeline:</strong><br/>
+                SNS topics → Fargate workers (&lt;5m P99)
+              </AnimatedText>
+              <AnimatedText delay={0.6} as="li" style={{ marginBottom: '1rem' }}>
+                <strong style={{ color: 'var(--brand-primary)' }}>AI Processing:</strong><br/>
+                200 pages/min parallel LLM + SQL agents
+              </AnimatedText>
+              <AnimatedText delay={0.7} as="li" style={{ marginBottom: '1rem' }}>
+                <strong style={{ color: 'var(--brand-primary)' }}>Data Storage:</strong><br/>
+                ClickHouse vectors + S3/MinIO audit logs
+              </AnimatedText>
+              <AnimatedText delay={0.8} as="li">
+                <strong style={{ color: 'var(--brand-primary)' }}>Alert Distribution:</strong><br/>
+                JSON → Snowflake → Tableau/Slack/Jira
+              </AnimatedText>
             </ul>
-          </Box>
-        </FlexBox>
+          </div>
+        </div>
       </Slide>
 
-      {/* Slide 11 – 2-Line SQL Demo */}
-      <Slide backgroundColor="dark">
-        <Heading color="brand">2-Line Risk Query</Heading>
-        <CodePane language="sql" theme="dracula">
-{`SELECT id,
-       AI_RISK(page_html) AS risk
-FROM merchants_today
-WHERE risk > 0.8;`}
-        </CodePane>
+      {/* SQL Demo Slide */}
+      <Slide id="sql" className="dark-bg">
+        <div style={{ textAlign: 'center', maxWidth: '1000px' }}>
+          <AnimatedText className="slide-title white">
+            2-Line Risk Query
+          </AnimatedText>
+          <AnimatedText delay={0.2}>
+            <div className="code-container">
+              <pre>
+                <code style={{ color: '#ff6b6b' }}>SELECT</code> <code style={{ color: '#ffd93d' }}>id</code>,{'\n'}
+                {'       '}<code style={{ color: '#6bcf7f' }}>AI_RISK</code>(<code style={{ color: '#ffd93d' }}>page_html</code>) <code style={{ color: '#ff6b6b' }}>AS</code> <code style={{ color: '#ffd93d' }}>risk</code>{'\n'}
+                <code style={{ color: '#ff6b6b' }}>FROM</code> <code style={{ color: '#74b9ff' }}>merchants_today</code>{'\n'}
+                <code style={{ color: '#ff6b6b' }}>WHERE</code> <code style={{ color: '#ffd93d' }}>risk</code> <code style={{ color: '#ff7675' }}>&gt;</code> <code style={{ color: '#a29bfe' }}>0.8</code>;
+              </pre>
+            </div>
+          </AnimatedText>
+        </div>
       </Slide>
 
-      {/* Slide 12 – 30-Day Pilot Plan */}
-      <Slide>
-        <Heading>30-Day Pilot Plan</Heading>
-        <Fade>
-          <ul style={{ fontSize: "36px", lineHeight: 1.4 }}>
-            <li>Wk 1 – Access & rules</li>
-            <li>Wk 2 – Nightly run</li>
-            <li>Wk 3 – Dashboards live</li>
-            <li>Wk 4 – KPI review</li>
+      {/* Pilot Plan Slide */}
+      <Slide id="pilot">
+        <div style={{ textAlign: 'center', maxWidth: '1200px' }}>
+          <AnimatedText className="slide-title">
+            30-Day Pilot Roadmap
+          </AnimatedText>
+          <div className="timeline">
+            <AnimatedText delay={0.1} className="timeline-item">
+              <h3 style={{ color: 'var(--brand-primary)', marginBottom: '1rem' }}>Week 1</h3>
+              <p>Access setup & rule configuration</p>
+            </AnimatedText>
+            <AnimatedText delay={0.2} className="timeline-item">
+              <h3 style={{ color: 'var(--brand-primary)', marginBottom: '1rem' }}>Week 2</h3>
+              <p>First automated nightly crawl</p>
+            </AnimatedText>
+            <AnimatedText delay={0.3} className="timeline-item">
+              <h3 style={{ color: 'var(--brand-primary)', marginBottom: '1rem' }}>Week 3</h3>
+              <p>Live dashboards & alerts</p>
+            </AnimatedText>
+            <AnimatedText delay={0.4} className="timeline-item">
+              <h3 style={{ color: 'var(--brand-primary)', marginBottom: '1rem' }}>Week 4</h3>
+              <p>KPI review & expansion planning</p>
+            </AnimatedText>
+          </div>
+        </div>
+      </Slide>
+
+      {/* Thank You Slide */}
+      <Slide id="thanks">
+        <div style={{ textAlign: 'center', maxWidth: '1000px' }}>
+          <AnimatedText className="slide-title">
+            Thank You & Next Steps
+          </AnimatedText>
+          <ul className="slide-list">
+            <AnimatedText delay={0.1} as="li">
+              Schedule technical deep dive session
+            </AnimatedText>
+            <AnimatedText delay={0.2} as="li">
+              Review implementation documentation
+            </AnimatedText>
           </ul>
-        </Fade>
+          <AnimatedText delay={0.4} className="slide-text" style={{ marginTop: '2rem', fontSize: '1.2rem' }}>
+            Book your 30-minute technical consultation
+          </AnimatedText>
+        </div>
       </Slide>
-
-      {/* Slide 13 – Thank You & Next Steps */}
-      <Slide>
-        <Heading>Thank You & Next Steps</Heading>
-        <Fade>
-          <ul style={{ fontSize: "32px", lineHeight: 1.4 }}>
-            <li>Let's schedule the deep dive</li>
-            <li>See draft PDF & SQL in repo</li>
-          </ul>
-        </Fade>
-        <Fade delay={0.3}>
-          <Text fontSize={24} marginTop="2rem">
-            Book a 30-min technical deep dive
-          </Text>
-        </Fade>
-      </Slide>
-    </Deck>
+    </>
   );
 }
