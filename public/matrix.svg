@@ -1,0 +1,56 @@
+<svg width="400" height="300" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background -->
+  <rect width="400" height="300" fill="#f8f9fa"/>
+  
+  <!-- Grid lines -->
+  <line x1="80" y1="50" x2="80" y2="250" stroke="#ddd" stroke-width="2"/>
+  <line x1="80" y1="250" x2="380" y2="250" stroke="#ddd" stroke-width="2"/>
+  <line x1="230" y1="50" x2="230" y2="250" stroke="#ddd" stroke-width="1"/>
+  <line x1="80" y1="150" x2="380" y2="150" stroke="#ddd" stroke-width="1"/>
+  
+  <!-- Quadrants with colors -->
+  <!-- Low Impact, Low Frequency -->
+  <rect x="80" y="150" width="150" height="100" fill="#e8f5e8" opacity="0.7"/>
+  <!-- High Impact, Low Frequency -->
+  <rect x="80" y="50" width="150" height="100" fill="#fff3cd" opacity="0.7"/>
+  <!-- Low Impact, High Frequency -->
+  <rect x="230" y="150" width="150" height="100" fill="#fff3cd" opacity="0.7"/>
+  <!-- High Impact, High Frequency -->
+  <rect x="230" y="50" width="150" height="100" fill="#f8d7da" opacity="0.7"/>
+  
+  <!-- Labels -->
+  <text x="40" y="105" font-family="Inter, sans-serif" font-size="14" font-weight="bold" text-anchor="middle" transform="rotate(-90, 40, 105)">IMPACT</text>
+  <text x="230" y="280" font-family="Inter, sans-serif" font-size="14" font-weight="bold" text-anchor="middle">FREQUENCY</text>
+  
+  <!-- Axis labels -->
+  <text x="155" y="45" font-family="Inter, sans-serif" font-size="12" text-anchor="middle" fill="#666">High</text>
+  <text x="155" y="270" font-family="Inter, sans-serif" font-size="12" text-anchor="middle" fill="#666">Low</text>
+  <text x="65" y="105" font-family="Inter, sans-serif" font-size="12" text-anchor="middle" fill="#666" transform="rotate(-90, 65, 105)">High</text>
+  <text x="65" y="205" font-family="Inter, sans-serif" font-size="12" text-anchor="middle" fill="#666" transform="rotate(-90, 65, 205)">Low</text>
+  
+  <!-- Sample data points -->
+  <circle cx="120" cy="80" r="6" fill="#E44E00"/>
+  <text x="130" y="85" font-family="Inter, sans-serif" font-size="10" fill="#333">Policy Violations</text>
+  
+  <circle cx="300" cy="90" r="6" fill="#dc3545"/>
+  <text x="310" y="85" font-family="Inter, sans-serif" font-size="10" fill="#333">Restricted Items</text>
+  <text x="310" y="97" font-family="Inter, sans-serif" font-size="10" fill="#333">(Vape, Kratom)</text>
+  
+  <circle cx="280" cy="180" r="5" fill="#ffc107"/>
+  <text x="290" y="175" font-family="Inter, sans-serif" font-size="10" fill="#333">Price Swings</text>
+  <text x="290" y="187" font-family="Inter, sans-serif" font-size="10" fill="#333">(>40%)</text>
+  
+  <circle cx="140" cy="200" r="4" fill="#28a745"/>
+  <text x="150" y="205" font-family="Inter, sans-serif" font-size="10" fill="#333">Minor Issues</text>
+  
+  <!-- Legend -->
+  <text x="320" y="25" font-family="Inter, sans-serif" font-size="12" font-weight="bold" fill="#333">Risk Level</text>
+  <circle cx="325" cy="35" r="4" fill="#dc3545"/>
+  <text x="335" y="39" font-family="Inter, sans-serif" font-size="10" fill="#333">Critical</text>
+  <circle cx="325" cy="45" r="4" fill="#E44E00"/>
+  <text x="335" y="49" font-family="Inter, sans-serif" font-size="10" fill="#333">High</text>
+  <circle cx="325" cy="55" r="4" fill="#ffc107"/>
+  <text x="335" y="59" font-family="Inter, sans-serif" font-size="10" fill="#333">Medium</text>
+  <circle cx="325" cy="65" r="4" fill="#28a745"/>
+  <text x="335" y="69" font-family="Inter, sans-serif" font-size="10" fill="#333">Low</text>
+</svg> 
