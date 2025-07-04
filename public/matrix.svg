@@ -1,112 +1,79 @@
-<svg width="800" height="600" xmlns="http://www.w3.org/2000/svg">
-  <!-- Background -->
-  <rect width="800" height="600" fill="#ffffff"/>
-  
-  <!-- Main container with shadow -->
-  <rect x="95" y="85" width="450" height="350" fill="rgba(0,0,0,0.08)" rx="12"/>
-  <rect x="90" y="80" width="450" height="350" fill="#ffffff" rx="12" stroke="#e5e7eb" stroke-width="2"/>
-  
-  <!-- Grid lines -->
-  <line x1="90" y1="255" x2="540" y2="255" stroke="#d1d5db" stroke-width="3"/>
-  <line x1="315" y1="80" x2="315" y2="430" stroke="#d1d5db" stroke-width="3"/>
-  
-  <!-- Quadrant backgrounds with enhanced colors -->
-  <!-- Low Impact, Low Frequency (Bottom Left) -->
-  <rect x="90" y="255" width="225" height="175" fill="#f0fdf4" opacity="0.9"/>
-  <!-- High Impact, Low Frequency (Top Left) -->
-  <rect x="90" y="80" width="225" height="175" fill="#fef3c7" opacity="0.9"/>
-  <!-- Low Impact, High Frequency (Bottom Right) -->
-  <rect x="315" y="255" width="225" height="175" fill="#fef3c7" opacity="0.9"/>
-  <!-- High Impact, High Frequency (Top Right) -->
-  <rect x="315" y="80" width="225" height="175" fill="#fee2e2" opacity="0.9"/>
-  
-  <!-- Quadrant strategy labels -->
-  <text x="202" y="120" font-family="Inter, sans-serif" font-size="18" font-weight="700" text-anchor="middle" fill="#7c2d12">MONITOR</text>
-  <text x="202" y="140" font-family="Inter, sans-serif" font-size="13" text-anchor="middle" fill="#a16207">High Impact</text>
-  <text x="202" y="155" font-family="Inter, sans-serif" font-size="13" text-anchor="middle" fill="#a16207">Low Frequency</text>
-  <text x="202" y="175" font-family="Inter, sans-serif" font-size="12" font-weight="500" text-anchor="middle" fill="#78716c">Schedule Reviews</text>
-  
-  <text x="427" y="120" font-family="Inter, sans-serif" font-size="18" font-weight="700" text-anchor="middle" fill="#dc2626">CRITICAL</text>
-  <text x="427" y="140" font-family="Inter, sans-serif" font-size="13" text-anchor="middle" fill="#991b1b">High Impact</text>
-  <text x="427" y="155" font-family="Inter, sans-serif" font-size="13" text-anchor="middle" fill="#991b1b">High Frequency</text>
-  <text x="427" y="175" font-family="Inter, sans-serif" font-size="12" font-weight="500" text-anchor="middle" fill="#78716c">Immediate Action</text>
-  
-  <text x="202" y="295" font-family="Inter, sans-serif" font-size="18" font-weight="700" text-anchor="middle" fill="#166534">ACCEPT</text>
-  <text x="202" y="315" font-family="Inter, sans-serif" font-size="13" text-anchor="middle" fill="#15803d">Low Impact</text>
-  <text x="202" y="330" font-family="Inter, sans-serif" font-size="13" text-anchor="middle" fill="#15803d">Low Frequency</text>
-  <text x="202" y="350" font-family="Inter, sans-serif" font-size="12" font-weight="500" text-anchor="middle" fill="#78716c">Minimal Oversight</text>
-  
-  <text x="427" y="295" font-family="Inter, sans-serif" font-size="18" font-weight="700" text-anchor="middle" fill="#b45309">AUTOMATE</text>
-  <text x="427" y="315" font-family="Inter, sans-serif" font-size="13" text-anchor="middle" fill="#d97706">Low Impact</text>
-  <text x="427" y="330" font-family="Inter, sans-serif" font-size="13" text-anchor="middle" fill="#d97706">High Frequency</text>
-  <text x="427" y="350" font-family="Inter, sans-serif" font-size="12" font-weight="500" text-anchor="middle" fill="#78716c">Workflow Rules</text>
-  
-  <!-- Main axis labels -->
-  <text x="50" y="260" font-family="Inter, sans-serif" font-size="20" font-weight="800" text-anchor="middle" transform="rotate(-90, 50, 260)" fill="#374151">IMPACT</text>
-  <text x="315" y="470" font-family="Inter, sans-serif" font-size="20" font-weight="800" text-anchor="middle" fill="#374151">FREQUENCY</text>
-  
-  <!-- Axis value labels -->
-  <text x="202" y="60" font-family="Inter, sans-serif" font-size="16" font-weight="600" text-anchor="middle" fill="#4b5563">High</text>
-  <text x="202" y="460" font-family="Inter, sans-serif" font-size="16" font-weight="600" text-anchor="middle" fill="#4b5563">Low</text>
-  <text x="70" y="170" font-family="Inter, sans-serif" font-size="16" font-weight="600" text-anchor="middle" fill="#4b5563" transform="rotate(-90, 70, 170)">High</text>
-  <text x="70" y="350" font-family="Inter, sans-serif" font-size="16" font-weight="600" text-anchor="middle" fill="#4b5563" transform="rotate(-90, 70, 350)">Low</text>
-  
-  <!-- Enhanced data points with better spacing -->
-  <circle cx="480" cy="130" r="12" fill="#dc2626" stroke="white" stroke-width="4"/>
-  <text x="500" y="120" font-family="Inter, sans-serif" font-size="14" font-weight="700" fill="#374151">Vape/Kratom</text>
-  <text x="500" y="135" font-family="Inter, sans-serif" font-size="14" font-weight="700" fill="#374151">Sales</text>
-  <text x="500" y="150" font-family="Inter, sans-serif" font-size="12" font-weight="500" fill="#6b7280">Block immediately</text>
-  
-  <circle cx="450" cy="190" r="10" fill="#E44E00" stroke="white" stroke-width="3"/>
-  <text x="470" y="185" font-family="Inter, sans-serif" font-size="13" font-weight="600" fill="#374151">Sanctions</text>
-  <text x="470" y="200" font-family="Inter, sans-serif" font-size="13" font-weight="600" fill="#374151">Violations</text>
-  <text x="470" y="215" font-family="Inter, sans-serif" font-size="11" font-weight="500" fill="#6b7280">Legal review</text>
-  
-  <circle cx="450" cy="310" r="9" fill="#d97706" stroke="white" stroke-width="3"/>
-  <text x="470" y="305" font-family="Inter, sans-serif" font-size="13" font-weight="600" fill="#374151">Price Volatility</text>
-  <text x="470" y="320" font-family="Inter, sans-serif" font-size="13" font-weight="600" fill="#374151">(>40%)</text>
-  <text x="470" y="335" font-family="Inter, sans-serif" font-size="11" font-weight="500" fill="#6b7280">Auto-flag</text>
-  
-  <circle cx="170" cy="350" r="8" fill="#16a34a" stroke="white" stroke-width="3"/>
-  <text x="120" y="345" font-family="Inter, sans-serif" font-size="12" font-weight="600" fill="#374151">Minor Policy</text>
-  <text x="120" y="360" font-family="Inter, sans-serif" font-size="12" font-weight="600" fill="#374151">Updates</text>
-  <text x="120" y="375" font-family="Inter, sans-serif" font-size="11" font-weight="500" fill="#6b7280">Log only</text>
-  
-  <circle cx="180" cy="140" r="9" fill="#ea580c" stroke="white" stroke-width="3"/>
-  <text x="120" y="135" font-family="Inter, sans-serif" font-size="12" font-weight="600" fill="#374151">Regulatory</text>
-  <text x="120" y="150" font-family="Inter, sans-serif" font-size="12" font-weight="600" fill="#374151">Changes</text>
-  <text x="120" y="165" font-family="Inter, sans-serif" font-size="11" font-weight="500" fill="#6b7280">Quarterly review</text>
-  
-  <!-- Enhanced legend with better spacing -->
-  <rect x="580" y="80" width="180" height="220" fill="white" stroke="#e5e7eb" stroke-width="2" rx="8"/>
-  <text x="670" y="105" font-family="Inter, sans-serif" font-size="16" font-weight="700" text-anchor="middle" fill="#374151">Risk Response</text>
-  <line x1="590" y1="115" x2="750" y2="115" stroke="#e5e7eb" stroke-width="1"/>
-  
-  <circle cx="600" cy="135" r="6" fill="#dc2626"/>
-  <text x="615" y="140" font-family="Inter, sans-serif" font-size="13" font-weight="600" fill="#374151">Critical - Block</text>
-  
-  <circle cx="600" cy="160" r="6" fill="#E44E00"/>
-  <text x="615" y="165" font-family="Inter, sans-serif" font-size="13" font-weight="600" fill="#374151">High - Review</text>
-  
-  <circle cx="600" cy="185" r="6" fill="#d97706"/>
-  <text x="615" y="190" font-family="Inter, sans-serif" font-size="13" font-weight="600" fill="#374151">Medium - Flag</text>
-  
-  <circle cx="600" cy="210" r="6" fill="#16a34a"/>
-  <text x="615" y="215" font-family="Inter, sans-serif" font-size="13" font-weight="600" fill="#374151">Low - Monitor</text>
-  
-  <circle cx="600" cy="235" r="6" fill="#6b7280"/>
-  <text x="615" y="240" font-family="Inter, sans-serif" font-size="13" font-weight="600" fill="#374151">Accept - Ignore</text>
-  
-  <!-- AI Focus indicator with better design -->
-  <rect x="580" y="320" width="180" height="100" fill="#fef7ed" stroke="#E44E00" stroke-width="2" rx="8"/>
-  <text x="670" y="345" font-family="Inter, sans-serif" font-size="15" font-weight="700" text-anchor="middle" fill="#E44E00">AI PRIORITY ZONE</text>
-  <text x="670" y="365" font-family="Inter, sans-serif" font-size="12" text-anchor="middle" fill="#9a3412">High-Impact</text>
-  <text x="670" y="380" font-family="Inter, sans-serif" font-size="12" text-anchor="middle" fill="#9a3412">High-Frequency</text>
-  <text x="670" y="395" font-family="Inter, sans-serif" font-size="11" font-weight="500" text-anchor="middle" fill="#78716c">Automated ML Detection</text>
-  
-  <!-- Subtle grid enhancement -->
-  <line x1="90" y1="167" x2="540" y2="167" stroke="#f3f4f6" stroke-width="1"/>
-  <line x1="90" y1="342" x2="540" y2="342" stroke="#f3f4f6" stroke-width="1"/>
-  <line x1="202" y1="80" x2="202" y2="430" stroke="#f3f4f6" stroke-width="1"/>
-  <line x1="427" y1="80" x2="427" y2="430" stroke="#f3f4f6" stroke-width="1"/>
+<svg width="720" height="540" xmlns="http://www.w3.org/2000/svg" aria-labelledby="title desc" role="img">
+  <title id="title">Impact versus Frequency Risk Matrix</title>
+  <desc id="desc">Four quadrants classify risks by impact and frequency with clear labels and data points.</desc>
+  <!-- Canvas Background -->
+  <rect width="720" height="540" fill="#ffffff"/>
+
+  <!-- Card Shadow -->
+  <rect x="110" y="80" width="500" height="340" rx="14" fill="rgba(0,0,0,0.07)"/>
+  <rect x="102" y="72" width="500" height="340" rx="14" fill="#ffffff" stroke="#e5e7eb" stroke-width="2"/>
+
+  <!-- Grid Lines -->
+  <line x1="102" y1="242" x2="602" y2="242" stroke="#d1d5db" stroke-width="3"/>
+  <line x1="352" y1="72" x2="352" y2="412" stroke="#d1d5db" stroke-width="3"/>
+
+  <!-- Quadrant Backgrounds -->
+  <rect x="102" y="72" width="250" height="170" fill="#fef3c7"/>
+  <rect x="352" y="72" width="250" height="170" fill="#fee2e2"/>
+  <rect x="102" y="242" width="250" height="170" fill="#f0fdf4"/>
+  <rect x="352" y="242" width="250" height="170" fill="#fff7ed"/>
+
+  <!-- Quadrant Headings -->
+  <g font-family="Inter, sans-serif" font-weight="700" font-size="18" fill="#374151">
+    <text x="227" y="110" text-anchor="middle">MONITOR</text>
+    <text x="477" y="110" text-anchor="middle" fill="#b91c1c">CRITICAL</text>
+    <text x="227" y="280" text-anchor="middle" fill="#15803d">ACCEPT</text>
+    <text x="477" y="280" text-anchor="middle" fill="#ca8a04">AUTOMATE</text>
+  </g>
+
+  <!-- Axis Labels -->
+  <text x="70" y="245" font-family="Inter, sans-serif" font-size="20" font-weight="800" fill="#111827" transform="rotate(-90 70 245)" text-anchor="middle">IMPACT</text>
+  <text x="352" y="450" font-family="Inter, sans-serif" font-size="20" font-weight="800" fill="#111827" text-anchor="middle">FREQUENCY</text>
+  <text x="227" y="62" font-family="Inter, sans-serif" font-size="15" font-weight="600" fill="#4b5563" text-anchor="middle">High</text>
+  <text x="227" y="470" font-family="Inter, sans-serif" font-size="15" font-weight="600" fill="#4b5563" text-anchor="middle">Low</text>
+  <text x="88" y="165" font-family="Inter, sans-serif" font-size="15" font-weight="600" fill="#4b5563" text-anchor="middle" transform="rotate(-90 88 165)">High</text>
+  <text x="88" y="330" font-family="Inter, sans-serif" font-size="15" font-weight="600" fill="#4b5563" text-anchor="middle" transform="rotate(-90 88 330)">Low</text>
+
+  <!-- Data Points -->
+  <!-- Critical: Vape/Kratom -->
+  <circle cx="520" cy="125" r="10" fill="#dc2626" stroke="#ffffff" stroke-width="3"/>
+  <text x="540" y="122" font-family="Inter, sans-serif" font-size="13" font-weight="600" fill="#111827">Vape / Kratom</text>
+
+  <!-- High Impact Low Frequency -->
+  <circle cx="260" cy="125" r="9" fill="#ea580c" stroke="#ffffff" stroke-width="3"/>
+  <text x="280" y="122" font-family="Inter, sans-serif" font-size="13" font-weight="600" fill="#111827">Regulatory Change</text>
+
+  <!-- High: Sanctions -->
+  <circle cx="520" cy="165" r="9" fill="#e11d48" stroke="#ffffff" stroke-width="3"/>
+  <text x="540" y="162" font-family="Inter, sans-serif" font-size="13" font-weight="600" fill="#111827">Sanctions</text>
+
+  <!-- Medium: Price Volatility -->
+  <circle cx="520" cy="305" r="9" fill="#d97706" stroke="#ffffff" stroke-width="3"/>
+  <text x="540" y="302" font-family="Inter, sans-serif" font-size="13" font-weight="600" fill="#111827">Price Volatility</text>
+
+  <!-- Low: Minor Issues -->
+  <circle cx="260" cy="340" r="8" fill="#16a34a" stroke="#ffffff" stroke-width="3"/>
+  <text x="280" y="337" font-family="Inter, sans-serif" font-size="13" font-weight="600" fill="#111827">Minor Issues</text>
+
+  <!-- Legend -->
+  <rect x="620" y="80" width="90" height="160" fill="#ffffff" stroke="#e5e7eb" rx="8"/>
+  <text x="665" y="105" font-family="Inter, sans-serif" font-size="14" font-weight="700" fill="#111827" text-anchor="middle">Risk</text>
+  <text x="665" y="123" font-family="Inter, sans-serif" font-size="14" font-weight="700" fill="#111827" text-anchor="middle">Response</text>
+
+  <g font-family="Inter, sans-serif" font-size="12" font-weight="600" fill="#111827">
+    <circle cx="630" cy="140" r="6" fill="#dc2626"/>
+    <text x="640" y="144">Critical</text>
+    <circle cx="630" cy="160" r="6" fill="#e11d48"/>
+    <text x="640" y="164">High</text>
+    <circle cx="630" cy="180" r="6" fill="#d97706"/>
+    <text x="640" y="184">Medium</text>
+    <circle cx="630" cy="200" r="6" fill="#16a34a"/>
+    <text x="640" y="204">Low</text>
+  </g>
+
+  <!-- AI Priority Box -->
+  <rect x="600" y="270" width="120" height="80" fill="#fff7ed" stroke="#ef6b00" stroke-width="2" rx="8"/>
+  <text x="660" y="295" font-family="Inter, sans-serif" font-size="13" font-weight="700" fill="#b45309" text-anchor="middle">AI PRIORITY</text>
+  <text x="660" y="312" font-family="Inter, sans-serif" font-size="11" fill="#b45309" text-anchor="middle">High-Impact</text>
+  <text x="660" y="327" font-family="Inter, sans-serif" font-size="11" fill="#b45309" text-anchor="middle">High-Frequency</text>
 </svg> 
