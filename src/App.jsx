@@ -1,6 +1,6 @@
 // App.jsx
 import React, { useState, useEffect, useRef } from 'react';
-import { motion, useInView, useScroll, useSpring } from 'framer-motion';
+import { motion as Motion, useInView, useScroll, useSpring } from 'framer-motion';
 
 // Custom hook for intersection observer
 const useIntersectionObserver = (options = {}) => {
@@ -39,7 +39,7 @@ const Slide = ({ children, className = '', id, ...props }) => {
   const isInView = useInView(ref, { threshold: 0.3, once: false });
 
   return (
-    <motion.section
+    <Motion.section
       ref={ref}
       id={id}
       className={`slide-container ${className}`}
@@ -51,7 +51,7 @@ const Slide = ({ children, className = '', id, ...props }) => {
       <div className="slide-content">
         {children}
       </div>
-    </motion.section>
+    </Motion.section>
   );
 };
 
@@ -61,7 +61,7 @@ const AnimatedText = ({ children, delay = 0, className = '', ...props }) => {
   const isInView = useInView(ref, { threshold: 0.3, once: true });
 
   return (
-    <motion.div
+    <Motion.div
       ref={ref}
       className={className}
       initial={{ opacity: 0, y: 30 }}
@@ -70,7 +70,7 @@ const AnimatedText = ({ children, delay = 0, className = '', ...props }) => {
       {...props}
     >
       {children}
-    </motion.div>
+    </Motion.div>
   );
 };
 
@@ -136,7 +136,7 @@ const ProgressBar = () => {
   });
 
   return (
-    <motion.div
+    <Motion.div
       className="progress-bar"
       style={{ scaleX, transformOrigin: '0%' }}
     />
