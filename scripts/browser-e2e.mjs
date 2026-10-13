@@ -4,7 +4,8 @@ import { chromium } from 'playwright';
 
 const baseURL = 'http://127.0.0.1:4173';
 const server = spawn('npm', ['run', 'preview', '--', '--host', '127.0.0.1', '--port', '4173'], {
-  stdio: ['ignore', 'pipe', 'pipe'],
+  detached: true,
+  stdio: 'ignore',
 });
 
 async function waitForServer() {
@@ -81,5 +82,9 @@ try {
   console.log('Browser E2E passed: 19 slides, semantic lists, truthful disclosure, keyboard/dot navigation, desktop/mobile layout.');
 } finally {
   await browser?.close();
-  server.kill('SIGTERM');
+  try {
+    process.kill(-server.pid, 'SIGTERM');
+  } catch {
+    // The preview process may already have exited.
+  }
 }

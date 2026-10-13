@@ -8,7 +8,8 @@ const outputDir = path.resolve(process.env.DEMO_OUTPUT_DIR || 'artifacts/demo');
 await mkdir(outputDir, { recursive: true });
 
 const server = spawn('npm', ['run', 'preview', '--', '--host', '127.0.0.1', '--port', '4173'], {
-  stdio: ['ignore', 'pipe', 'pipe'],
+  detached: true,
+  stdio: 'ignore',
 });
 
 async function waitForServer() {
@@ -58,5 +59,9 @@ try {
   console.log(`Captured actual browser workflow in ${outputDir}`);
 } finally {
   await browser?.close();
-  server.kill('SIGTERM');
+  try {
+    process.kill(-server.pid, 'SIGTERM');
+  } catch {
+    // The preview process may already have exited.
+  }
 }
