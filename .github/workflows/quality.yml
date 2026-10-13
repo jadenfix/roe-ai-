@@ -1,0 +1,33 @@
+name: Quality
+
+on:
+  push:
+    branches: ['**']
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  browser-workflow:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npm run lint
+      - run: npm run build
+      - run: npx playwright install --with-deps chromium
+      - run: npm run test:e2e
+      - name: Generate actual browser demo artifact
+        run: npm run media:build
+      - uses: actions/upload-artifact@v4
+        with:
+          name: roe-ai-browser-demo
+          path: artifacts/demo/
+          if-no-files-found: error
+          retention-days: 7

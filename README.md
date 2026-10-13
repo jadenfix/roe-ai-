@@ -1,6 +1,8 @@
-# Roe-AI Lite Presentation
+# Roe-AI Lite — Illustrative Presentation Demo
 
-A production-quality, scroll-based presentation built with React, Vite, and Framer Motion. Features smooth animations, professional design, and an engaging user experience for showcasing merchant risk intelligence solutions.
+A scroll-based React presentation for discussing an illustrative merchant-risk review workflow.
+
+> **Scope:** this repository is a provider-free presentation demo using synthetic examples. It does not connect to Roe AI systems, customer data, third-party providers, or a production risk service. Architecture, SQL, timelines, and KPIs are proposals to validate—not deployed capabilities or measured results.
 
 ## Features
 
@@ -21,7 +23,7 @@ A production-quality, scroll-based presentation built with React, Vite, and Fram
 - **Risk Prioritization Matrix**: Interactive SVG with clear quadrant labeling
 - **Technical Architecture**: Detailed system diagrams with explanations
 - **Code Examples**: Syntax-highlighted SQL demos
-- **ROI Metrics**: Compelling statistics with visual emphasis
+- **Pilot hypotheses**: measurable questions without unsupported performance claims
 - **Implementation Timeline**: 30-day pilot roadmap
 
 ## Setup & Installation
@@ -105,6 +107,17 @@ Modify sections in `src/App.jsx`:
 - **Keyboard**: Use arrow keys or Page Up/Down
 - **Touch**: Swipe gestures on mobile devices
 
+## Verification
+
+```bash
+npm run lint
+npm run build
+npx playwright install chromium
+npm run test:e2e
+```
+
+The browser test boots the production preview and verifies the full 19-slide flow on desktop and mobile, semantic list markup, truthful demo disclosure, keyboard navigation, navigation dots, claim removal, and horizontal-overflow safety.
+
 ### Quick Navigation
 - **Navigation Dots**: Click any dot on the right side to jump to that section
 - **Progress Bar**: Shows current position in presentation
@@ -114,7 +127,7 @@ Modify sections in `src/App.jsx`:
 2. **Executive Summary** - High-level overview
 3. **Challenge** - Problem statement
 4. **Solution** - Roe-AI Lite overview
-5. **ROI** - Key metrics and benefits
+5. **Pilot hypotheses** - metrics a real pilot would need to measure
 6. **Discovery** - Implementation workshop
 7. **Requirements** - Data and infrastructure needs
 8. **Risk Matrix** - Prioritization framework
@@ -171,7 +184,7 @@ npm run lint
 
 ## Deployment
 
-### Recommended Platforms
+### Possible Static Hosts
 - **Vercel**: `vercel deploy`
 - **Netlify**: Drag & drop `dist/` folder
 - **GitHub Pages**: Enable in repository settings
@@ -194,4 +207,4 @@ This project is proprietary software developed for Roe-AI presentation purposes.
 
 ---
 
-**Contact**: Jaden Fix · Solutions Engineer · roe-ai.com
+**Author**: Jaden Fix · portfolio presentation demo
