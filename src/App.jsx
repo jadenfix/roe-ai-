@@ -1,37 +1,6 @@
 // App.jsx
 import React, { useState, useEffect, useRef } from 'react';
-import { motion, useInView, useScroll, useSpring } from 'framer-motion';
-
-// Custom hook for intersection observer
-const useIntersectionObserver = (options = {}) => {
-  const [entries, setEntries] = useState([]);
-  const observer = useRef(null);
-
-  useEffect(() => {
-    if (observer.current) observer.current.disconnect();
-
-    observer.current = new IntersectionObserver((observedEntries) => {
-      setEntries(observedEntries);
-    }, options);
-
-    const { current: currentObserver } = observer;
-    return () => currentObserver.disconnect();
-  }, [options]);
-
-  const observe = (element) => {
-    if (element && observer.current) {
-      observer.current.observe(element);
-    }
-  };
-
-  const unobserve = (element) => {
-    if (element && observer.current) {
-      observer.current.unobserve(element);
-    }
-  };
-
-  return [entries, { observe, unobserve }];
-};
+import { motion as Motion, useInView, useScroll, useSpring } from 'framer-motion';
 
 // Slide component with animations
 const Slide = ({ children, className = '', id, ...props }) => {
@@ -39,7 +8,7 @@ const Slide = ({ children, className = '', id, ...props }) => {
   const isInView = useInView(ref, { threshold: 0.3, once: false });
 
   return (
-    <motion.section
+    <Motion.section
       ref={ref}
       id={id}
       className={`slide-container ${className}`}
@@ -51,7 +20,7 @@ const Slide = ({ children, className = '', id, ...props }) => {
       <div className="slide-content">
         {children}
       </div>
-    </motion.section>
+    </Motion.section>
   );
 };
 
@@ -61,7 +30,7 @@ const AnimatedText = ({ children, delay = 0, className = '', ...props }) => {
   const isInView = useInView(ref, { threshold: 0.3, once: true });
 
   return (
-    <motion.div
+    <Motion.div
       ref={ref}
       className={className}
       initial={{ opacity: 0, y: 30 }}
@@ -70,7 +39,7 @@ const AnimatedText = ({ children, delay = 0, className = '', ...props }) => {
       {...props}
     >
       {children}
-    </motion.div>
+    </Motion.div>
   );
 };
 
@@ -115,7 +84,10 @@ const Navigation = ({ activeSection }) => {
   return (
     <div className="nav-indicator">
       {slides.map((slide) => (
-        <div
+        <button
+          type="button"
+          aria-label={slide.label}
+          aria-current={activeSection === slide.id ? "step" : undefined}
           key={slide.id}
           className={`nav-dot ${activeSection === slide.id ? 'active' : ''}`}
           onClick={() => scrollToSection(slide.id)}
@@ -136,7 +108,7 @@ const ProgressBar = () => {
   });
 
   return (
-    <motion.div
+    <Motion.div
       className="progress-bar"
       style={{ scaleX, transformOrigin: '0%' }}
     />
@@ -147,17 +119,15 @@ const ProgressBar = () => {
 export default function App() {
   const [activeSection, setActiveSection] = useState('hero');
   
-  const [entries] = useIntersectionObserver({
-    threshold: 0.3,
-    rootMargin: '-20% 0px -20% 0px'
-  });
-
   useEffect(() => {
-    const visibleEntry = entries.find(entry => entry.isIntersecting);
-    if (visibleEntry) {
-      setActiveSection(visibleEntry.target.id);
-    }
-  }, [entries]);
+    const observer = new IntersectionObserver((entries) => {
+      const visible = entries.filter(entry => entry.isIntersecting)
+        .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
+      if (visible) setActiveSection(visible.target.id);
+    }, { threshold: 0, rootMargin: '-20% 0px -50% 0px' });
+    document.querySelectorAll('.slide-container').forEach(section => observer.observe(section));
+    return () => observer.disconnect();
+  }, []);
 
   return (
     <>

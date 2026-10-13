@@ -571,3 +571,14 @@ a:focus {
     min-height: auto;
   }
 }
+
+/* Long headings and grid children must remain readable on phone screens. */
+.slide-content, .split-layout > *, .tech-deep-dive > * {
+  min-width: 0;
+  max-width: 100%;
+  overflow-wrap: anywhere;
+}
+button.nav-dot {
+  padding: 0;
+  border: 0;
+}
