@@ -1,0 +1,95 @@
+name: Quality
+
+on:
+  push:
+    branches: ['**']
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  browser-workflow:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npm audit --audit-level=high
+      - run: npm run lint
+      - run: npm run build
+      - run: npx playwright install --with-deps chromium
+      - run: npm run test:e2e
+      - name: Install media encoder
+        run: sudo apt-get install -y ffmpeg
+      - name: Generate actual browser demo artifact
+        run: npm run media:build
+      - uses: actions/upload-artifact@v4
+        with:
+          name: roe-ai-browser-demo
+          path: artifacts/demo/
+          if-no-files-found: error
+          retention-days: 7
+      - name: Verify checked-in demo receipt
+        if: ${{ hashFiles('docs/demo/capture.json') != '' }}
+        run: npm run verify:demo
+
+  publish-demo:
+    if: ${{ github.event_name == 'push' && github.ref_name == 'codex/truthful-demo-20261013-roe-ai' }}
+    needs: browser-workflow
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Check whether the source-pinned demo is already published
+        id: media
+        run: |
+          if test -f docs/demo/capture.json; then
+            echo "needed=false" >> "$GITHUB_OUTPUT"
+          else
+            echo "needed=true" >> "$GITHUB_OUTPUT"
+          fi
+      - uses: actions/setup-node@v4
+        if: ${{ steps.media.outputs.needed == 'true' }}
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+        if: ${{ steps.media.outputs.needed == 'true' }}
+      - name: Install media verifier
+        if: ${{ steps.media.outputs.needed == 'true' }}
+        run: sudo apt-get install -y ffmpeg
+      - uses: actions/download-artifact@v4
+        if: ${{ steps.media.outputs.needed == 'true' }}
+        with:
+          name: roe-ai-browser-demo
+          path: artifacts/published
+      - name: Write source-pinned demo receipt
+        if: ${{ steps.media.outputs.needed == 'true' }}
+        env:
+          CAPTURE_SOURCE_COMMIT: ${{ github.sha }}
+          CAPTURE_WORKFLOW_RUN: ${{ github.run_id }}
+        run: npm run media:receipt -- artifacts/published
+      - run: npm run verify:demo
+        if: ${{ steps.media.outputs.needed == 'true' }}
+      - name: Publish only to the unchanged review branch
+        if: ${{ steps.media.outputs.needed == 'true' }}
+        env:
+          EXPECTED_HEAD: ${{ github.sha }}
+        run: |
+          git fetch origin "${GITHUB_REF_NAME}"
+          test "$(git rev-parse "origin/${GITHUB_REF_NAME}")" = "$EXPECTED_HEAD"
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add docs/demo
+          git commit -m "Add source-pinned Roe AI browser demo"
+          git push origin "HEAD:${GITHUB_REF_NAME}"

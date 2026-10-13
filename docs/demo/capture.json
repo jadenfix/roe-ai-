@@ -1,0 +1,53 @@
+{
+  "schema_version": 1,
+  "scope": "Provider-free React presentation using synthetic examples; no Roe AI production system, customer data, live provider, measured performance, or deployment claim.",
+  "captured_source_commit": "1d33c5cd1270a7af7306f841602070012d982882",
+  "captured_source_tree": "1fa9637697a994582da504f8e73d4b304b0f1753",
+  "workflow_run_id": "38456062118",
+  "workflow_run_url": "https://github.com/jadenfix/roe-ai-/actions/runs/38456062118",
+  "capture_command": "npm run media:build",
+  "verification_command": "npm run verify:demo",
+  "runtime_input_blobs": {
+    "index.html": "0c589eccd4d48e270e161a1ab91baee5e5f4b4bc",
+    "package-lock.json": "e1178d91457e8d23f44ffaff737b4f72e5ff0863",
+    "package.json": "5fd756dd59905c313ff973f4ee5a297bd1836e25",
+    "public/architecture.svg": "76fd0d40fca9d6dd49b5f1134655e2afd0195fa6",
+    "public/matrix.svg": "fd7c83ece9a058c00fb532982dbcd15282ec9fc9",
+    "public/roe_ai_logo.jpeg": "5742b6aa2405290bfe30f7f7563b203e47bfdced",
+    "src/App.jsx": "ae3118c7f233322c9bacbeb4ef8d460fb2260397",
+    "src/index.css": "aadd4f6fe0ee61614d59975e6f842d13d758a2c5",
+    "src/main.jsx": "b9a1a6deac8775b5598874b2bc3c7971d82cf211",
+    "vite.config.js": "8b0f57b91aeb45c54467e29f983a0893dc83c4d9"
+  },
+  "media": {
+    "roe-ai-demo.gif": {
+      "mime_type": "image/gif",
+      "bytes": 5474876,
+      "sha256": "e41aa087966ca9fbcf9486afaba1488977bfb29b562d939a391b24b9e9a7655c",
+      "codec_name": "gif",
+      "width": 800,
+      "height": 450,
+      "duration": "13.760000",
+      "nb_read_frames": "110"
+    },
+    "roe-ai-demo.mp4": {
+      "mime_type": "video/mp4",
+      "bytes": 1564908,
+      "sha256": "4fe40fa3929b26ea1728bd7094c5b5d2f0834e03667ce5314d6bd6714ab74ba2",
+      "codec_name": "h264",
+      "width": 1280,
+      "height": 720,
+      "duration": "13.800000",
+      "nb_read_frames": "207"
+    },
+    "roe-ai-demo-poster.png": {
+      "mime_type": "image/png",
+      "bytes": 116612,
+      "sha256": "dcd5eff4cbfc1af50a1be435b128560b3e6448023eb638e9016d28d2b724e3d3",
+      "codec_name": "png",
+      "width": 1280,
+      "height": 720,
+      "nb_read_frames": "1"
+    }
+  }
+}

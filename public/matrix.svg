@@ -1,8 +1,9 @@
 <svg width="720" height="540" xmlns="http://www.w3.org/2000/svg" aria-labelledby="title desc" role="img">
   <title id="title">Impact versus Frequency Risk Matrix</title>
-  <desc id="desc">Four quadrants classify risks by impact and frequency with clear labels and data points.</desc>
+  <desc id="desc">An illustrative four-quadrant discussion aid. The points are examples, not measured customer data.</desc>
   <!-- Canvas Background -->
   <rect width="720" height="540" fill="#ffffff"/>
+  <text x="360" y="28" font-family="Inter, sans-serif" font-size="13" font-weight="800" fill="#9a3412" text-anchor="middle">ILLUSTRATIVE EXAMPLES · NOT SCORED CUSTOMER DATA</text>
 
   <!-- Card Shadow -->
   <rect x="110" y="80" width="500" height="340" rx="14" fill="rgba(0,0,0,0.07)"/>
@@ -76,4 +77,4 @@
   <text x="660" y="295" font-family="Inter, sans-serif" font-size="13" font-weight="700" fill="#b45309" text-anchor="middle">AI PRIORITY</text>
   <text x="660" y="312" font-family="Inter, sans-serif" font-size="11" fill="#b45309" text-anchor="middle">High-Impact</text>
   <text x="660" y="327" font-family="Inter, sans-serif" font-size="11" fill="#b45309" text-anchor="middle">High-Frequency</text>
-</svg> 
+</svg>
