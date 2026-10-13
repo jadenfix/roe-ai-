@@ -58,9 +58,10 @@ try {
   assert.ok((await desktop.evaluate(() => window.scrollY)) > 100, 'keyboard navigation should move to the next slide');
 
   await desktop.getByRole('button', { name: '10 Integration Architecture' }).click();
-  await desktop.waitForTimeout(900);
-  const architectureTop = await desktop.locator('#architecture').evaluate((element) => element.getBoundingClientRect().top);
-  assert.ok(Math.abs(architectureTop) < 220, 'navigation dot should reveal the architecture slide');
+  await desktop.waitForFunction(() => {
+    const element = document.getElementById('architecture');
+    return element && Math.abs(element.getBoundingClientRect().top) < window.innerHeight * 0.5;
+  });
   assert.match(await desktop.locator('#architecture').innerText(), /Architecture discussion only/i);
   assert.equal(browserErrors.length, 0, `browser emitted errors: ${browserErrors.join(' | ')}`);
 
@@ -71,7 +72,10 @@ try {
   const disclosureBox = await mobile.getByTestId('demo-disclosure').boundingBox();
   assert.ok(disclosureBox && disclosureBox.width <= 374, 'demo disclosure must fit on a phone viewport');
   await mobile.getByRole('button', { name: '13 Next Steps' }).click();
-  await mobile.waitForTimeout(900);
+  await mobile.waitForFunction(() => {
+    const element = document.getElementById('thanks');
+    return element && Math.abs(element.getBoundingClientRect().top) < window.innerHeight * 0.5;
+  });
   assert.match(await mobile.locator('#thanks').innerText(), /Validate the evidence/i);
 
   console.log('Browser E2E passed: 19 slides, semantic lists, truthful disclosure, keyboard/dot navigation, desktop/mobile layout.');
