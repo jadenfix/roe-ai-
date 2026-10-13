@@ -10,7 +10,9 @@
     "preview": "vite preview",
     "test:e2e": "node scripts/browser-e2e.mjs",
     "capture:demo": "node scripts/capture-demo.mjs",
-    "media:build": "bash scripts/build-demo-media.sh"
+    "media:build": "bash scripts/build-demo-media.sh",
+    "media:receipt": "node scripts/write-capture-receipt.mjs",
+    "verify:demo": "node scripts/verify-demo.mjs"
   },
   "dependencies": {
     "framer-motion": "^12.23.0",

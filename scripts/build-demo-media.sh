@@ -14,7 +14,7 @@ ffmpeg -hide_banner -loglevel error -y \
 
 ffmpeg -hide_banner -loglevel error -y \
   -i "$demo_output_dir/roe-ai-demo.webm" \
-  -vf "fps=10,scale=960:-1:flags=lanczos,split[s0][s1];[s0]palettegen=max_colors=160[p];[s1][p]paletteuse=dither=bayer:bayer_scale=3" \
+  -vf "fps=8,scale=800:-1:flags=lanczos,split[s0][s1];[s0]palettegen=max_colors=128[p];[s1][p]paletteuse=dither=bayer:bayer_scale=3" \
   -loop 0 "$demo_output_dir/roe-ai-demo.gif"
 
 ffprobe -v error -show_entries stream=codec_name,width,height,nb_frames \
